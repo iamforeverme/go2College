@@ -23,4 +23,5 @@ DATABASES = {
 
 6. docker-compose up
 
+PS: sudo chown -R $USER:$USER .
 Confirm localhost:8000 is accessible.
