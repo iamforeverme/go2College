@@ -23,5 +23,7 @@ DATABASES = {
 
 6. docker-compose up
 
-PS: sudo chown -R $USER:$USER .
 Confirm localhost:8000 is accessible.
+PS: 
+sudo chown -R $USER:$USER .
+psql -h localhost -p 5432 -U ctuser
