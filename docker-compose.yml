@@ -11,6 +11,16 @@ services:
       - ./postgresDB/config/:/etc/postgresql
     ports:
       - "5432:5432"
+
+  redis:
+    image: redis:3
+
+    volumes:
+    - ./redis/data/:/data/
+
+    ports:
+    - "6379:6379"
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -18,5 +28,7 @@ services:
       - .:/src
     ports:
       - "8000:8000"
+
     depends_on:
       - db
+      - redis
