@@ -16,3 +16,23 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
+
+
+from celery.task.schedules import crontab
+from celery.decorators import periodic_task
+from celery.utils.log import get_task_logger
+
+logger = get_task_logger(__name__)
+
+
+@periodic_task(
+    run_every=(crontab(minute='*/15')),
+    name="task_save_latest_flickr_image",
+    ignore_result=True
+)
+def task_save_latest_flickr_image():
+    """
+    Saves latest image from Flickr
+    """
+    print("hello world")
+    logger.info("Saved image from Flickr")
